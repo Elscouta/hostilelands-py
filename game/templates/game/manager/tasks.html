@@ -1,0 +1,11 @@
+<h2>Current tasks:</h2>
+
+{% include "game/include/progress_list.html" with tasktags="expedition" %}
+{% include "game/include/progress_list.html" with tasktags="project" %}
+{% include "game/include/progress_list.html" with tasktags="job" %}
+
+<h2>Available tasks:</h2>
+
+{% include "game/include/possible_tasks.html" with tasktags="expedition" %}
+{% include "game/include/possible_tasks.html" with tasktags="project" %}
+{% include "game/include/possible_tasks.html" with tasktags="job" %}

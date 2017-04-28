@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html ng-app="villageApp">
+<head>
+<title>Hostile Lands</title>
+<link rel="stylesheet" href="/static/common.css" type="text/css" />
+<link rel="stylesheet" href="/static/village.css" type="text/css" />
+</head>
+<body ng-controller='MainCtrl'>
+
+<script type='text/javascript'>var vid = {{ village.pk }};</script>
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
+<script type='text/javascript' src='/static/angular.min.js'></script>
+<script type='text/javascript' src='/static/angular-route.min.js'></script>
+<script type='text/javascript' src='/static/main.js'></script>
+<script type='text/javascript' src='/static/utils.js'></script>
+<script type='text/javascript' src='/static/errors.js'></script>
+<script type='text/javascript' src='/static/json.js'></script>
+<script type='text/javascript' src='/static/tasks.js'></script>
+<script type='text/javascript' src='/static/properties.js'></script>
+<script type='text/javascript' src='/static/events.js'></script>
+<script type='text/javascript' src='/static/ressources.js'></script>
+<script type='text/javascript' src='/static/actions.js'></script>
+
+  <div ng-controller='EventPopupCtrl' class='popup' ng-show='showcurrent' ng-cloak>
+    <div class='popup_content'>
+      {$ currentcontent $}
+    </div>
+    <div class='popup_button_box'>
+      <div class='button' ng-click='markread()'>
+        Ok!
+      </div>
+    </div>
+  </div>
+
+<div class='header'>{{ village.name }}</div>
+
+<div class='sidebar'>
+  <div class='sidebar_section' id='building_list' ng-controller='BuildingListCtrl'>
+    <div class='sidebar_header'>Current buildings:</div>
+    <ul>
+      <li ng-repeat="bld in buildings">
+        <a href="#/building/{$ bld.textid $}">{$ bld.name $} ({$ bld.level $})</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class='sidebar_section' id='manager_list'>
+    <div class='sidebar_header'>Manage:</div>
+    <ul>
+      <li><a href="#/manager/tasks/">Tasks</a></li>
+    </ul>
+  </div>
+</div>
+
+<div id='main_frame'>
+  <div id='log' ng-controller='LogCtrl'>
+    <div ng-repeat="msg in messages track by $index">
+      <div class='log_msg'>{$ msg $}</div>
+    </div>
+  </div>
+  <div id='error_list' ng-controller='ErrorListCtrl'>
+    <div ng-repeat="err in errors track by $index">
+      <div class='error'>{$ err $}</div>
+    </div> 
+  </div>
+  <div id='building_content' ng-view>
+  </div>
+</div>
+
+<div id='right_frame' ng-controller='RhsCtrl'>
+  <div ng-repeat="cat in ['core', 'basic']">
+    <div ng-repeat="res in ressources_categories[cat]" ng-cloak>
+      <div class='ressource_entry'>
+        <span class='ressource_label'>{$ res $}:</span>
+        <span class='ressource_middle'>
+          <span class='ressource_current'>
+	    {$ ressources[res].current | humanizeQty: ressources[res].integer $}
+	  </span> /
+          <span class='ressource_storage'>
+	    {$ ressources[res].storage | humanizeQty: ressources[res].integer $}
+	  </span> 
+        </span>
+        <span class='ressource_production' ng-show='!ressources[res].noprod'>
+	  ({$ ressources[res].production | humanizeProd $} / sec)
+	</span>
+      </div>
+      <div class='ressource_entry' style='font-size: 70%' ng-show='!ressources[res].nouse'>
+        <span class='ressource_label'>in use:</span>
+        <span class='ressource_middle'>
+          <span class='ressource_current'>
+	    {$ ressources[res].current - ressources[res].free | humanizeQty: ressources[res].integer $}
+	  </span> /
+          <span class='ressource_storage'>
+	    {$ ressources[res].current | humanizeQty: ressources[res].integer $}
+	  </span>
+        </span>
+      </div>
+    </div>
+    <hr />
+  </div>
+</div>
+
+</body>
+</html>

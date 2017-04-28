@@ -1,0 +1,12 @@
+{% if village_list %}
+  Welcome to Hostile Lands.<br />
+  <br />
+  Village list:
+  <ul>
+  {% for village in village_list %}
+    <li><a href="/game/{{ village.id }}/">{{ village.name }}</a></li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>No villages yet.</p>
+{% endif %}

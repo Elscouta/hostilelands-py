@@ -1,0 +1,15 @@
+<div ng-controller="PossibleTasksCtrl" data-tasktags="{{ tasktags }}">
+  <div class='possibletask' ng-repeat='task in tasks'>
+
+    <div ng-click="task_start(task.textid)" 
+  	 ng-class="{ actionbutton_enabled: task_check_reqs(task.cost),
+	 	     actionbutton_disabled: !task_check_reqs(task.cost) }"
+         my-tooltip>
+      {$ task.shortdesc $}
+      <span class='actionbutton_tooltip' ng-style="tooltipalign" ng-show="show">
+	<div ng-bind-html="task.longdesc"></div>
+      </span>
+    </div>
+  </div>
+</div>
+

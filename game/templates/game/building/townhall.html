@@ -1,0 +1,35 @@
+<div id='townhall'>
+
+<h1>Town Hall</h1>
+
+The town hall is the cornerstone of your village organization. From this building, you can
+order your workers to perform various tasks<br />
+<br />
+
+<b>Level:</b> {{ building.level }}<br />
+<b>Total workers:</b> {$ ressources.population.current $}<br />
+<b>Available workers:</b> {$ ressources.freeworkers.current $}<br />
+
+<h2>Expeditions:</h2>
+
+{% include "game/include/progress_list.html" with listid="expeditions" tasktags="expedition" %}
+{% include "game/include/possible_tasks.html" with listid="expeditions" tasktags="expedition" %} 
+
+<h2>Projects:</h2>
+
+{% include "game/include/progress_list.html" with listid="projects" tasktags="project+townhall" %}
+{% include "game/include/possible_tasks.html" with listid="projects" tasktags="project+townhall" %}
+
+<h2>Actions:</h2>
+
+<form action="{% url 'rename' village.id %}" method='post'>
+{% csrf_token %}
+Rename vilage: 
+<input type='text' name='newname' value='{{ village.name }}' />
+<input type='submit' value='Change' />
+</form>
+<form action="{% url 'reset' village.id %}" method='post'>
+{% csrf_token %}
+Reset village: <input type='submit' value='Reset!' />
+</form>
+</div>

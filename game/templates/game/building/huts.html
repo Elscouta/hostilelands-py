@@ -1,0 +1,38 @@
+<h1>Huts</h1>
+
+Your population need a place to sleep. These huts may be low quality, but at least they provide a roof.<br />
+<br />
+<b>Level:</b> {{ building.level }}<br />
+<b>Total population:</b> 
+{% include "game/include/ressource_widget.html" with ressource="population.current" filter="humanizeQty" %}<br />
+<b>Room capacity:</b> 
+{% include "game/include/ressource_widget.html" with ressource="population.storage" filter="humanizeQty" %}<br />
+
+<h2>Policies</h2>
+
+Your workers need rest and food. Or, do they?<br />
+<br />
+<div ng-controller="PoliciesCtrl" data-policies="hours_work hours_leisure">
+  <div class='policy_section_title'>Day schedule:</div>
+
+  <div class='policy_entry'>
+    <span class='policy_label'>Work hours per day:</span> 
+    <input class='policy_number' type='number' min='0' max='12' ng-model='hours_work' />
+  </div>
+  <div class='policy_entry'>
+    <span class='policy_label'>Leisure hours per day:</span>
+    <input class='policy_number' type='number' min='0' max='12' ng-model='hours_leisure' />
+  </div>
+  <div class='policy_entry'>
+    <span class='policy_label'>Rest hours per day:</span>
+    <input class='policy_number' type='number' readonly ng-value='24 - hours_work - hours_leisure' />
+  </div>
+</div>
+
+<h2>Projects</h2>
+
+{% include "game/include/progress_list.html" with tasktags="project+huts" %}
+{% include "game/include/possible_tasks.html" with tasktags="project+huts" %}
+
+<b>
+

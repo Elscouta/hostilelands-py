@@ -1,0 +1,16 @@
+<h1>Storehouse</h1>
+
+Piles of ressources! This is where most of the village wealth is
+stored.<br />
+<br />
+<b>Level:</b> {{ building.level }}<br /> 
+<br />
+<b>Total food storage:</b> 
+{% include "game/include/ressource_widget.html" with ressource="food.storage" filter="humanizeQty" %}<br />
+<b>Total wood storage:</b> 
+{% include "game/include/ressource_widget.html" with ressource="wood.storage" filter="humanizeQty" %}<br />
+
+<h2>Projects:</h2>
+
+{% include "game/include/progress_list.html" with tasktags="project+storehouse" %}
+{% include "game/include/possible_tasks.html" with tasktags="project+storehouse" %}

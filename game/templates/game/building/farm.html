@@ -1,0 +1,30 @@
+<h1>Farm</h1>
+
+Fields everywhere! This is where most of the village food is
+produced.<br />
+<br />
+<b>Level:</b> {{ building.level }}<br /> 
+<br />
+<b>Farm efficiency:</b> 
+{% include "game/include/property_widget.html" with property="property:farmefficiency" %}<br />
+<b>Base food produced by farms:</b> 
+{% include "game/include/property_widget.html" with property="internal[building:farm]:production:food" %}<br />
+<b>Additionnal food produced by farmers:</b>
+{% include "game/include/property_widget.html" with property="internal[task:job/farmer:workers]:production:food" %}<br />
+<b>Total food consumed by population:</b> 
+{% include "game/include/property_widget.html" with property="internal[property:foodconsumption]:consume:food" %}<br />
+<br />
+<b>Net food production: </b> 
+{% include "game/include/ressource_widget.html" with ressource="food.production" filter="humanizeProd" %}<br />
+<b>Current food storage: </b>
+{% include "game/include/ressource_widget.html" with ressource="food.current" filter="humanizeQty" %}<br />
+
+<h2>Jobs:</h2>
+
+{% include "game/include/progress_list.html" with tasktags="job+farm" %}
+{% include "game/include/possible_tasks.html" with tasktags="job+farm" %}
+
+<h2>Projects:</h2>
+
+{% include "game/include/progress_list.html" with tasktags="project+farm" %}
+{% include "game/include/possible_tasks.html" with tasktags="project+farm" %}

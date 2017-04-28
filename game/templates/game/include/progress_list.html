@@ -1,0 +1,21 @@
+<div class='project_list' ng-controller="ProgressListCtrl" data-tasktags="{{ tasktags }}">
+  <div class='progress-container' ng-repeat='task in tasks'>
+    <div class='progress-bar' ng-style="{ 'width': 100 * task.current_completion / task.length + '%'}"
+    			      ng-show='!task.is_continuous'>
+    </div>
+    <div class='progress-bar-continuous' ng-style="{ 'width': 100 * task.current_completion / task.length + '%'}"
+    			      ng-show='task.is_continuous'>
+    </div>
+    <div class='progress-text'>{$ task.shortdesc $}</div>
+    <div class='progress-rightside' ng-show='!task.is_continuous'>
+      <input type='button' ng-click='task_finish(task.id)' value='Finish!' />
+      <input type='button' ng-click='task_cancel(task.id)' value='Cancel' >
+    </div>
+    <div class='progress-rightside' ng-show='task.is_continuous'>
+      <input type='button' ng-click='task_addworker(task.id)' value='+1' />
+      <input type='button' ng-click='task_removeworker(task.id)' value='-1' />
+    </div>
+  </div>
+</div>
+
+

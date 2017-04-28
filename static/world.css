@@ -1,0 +1,11 @@
+#main_frame {
+  position: fixed;
+  top: 50px;
+  bottom: 0;
+  width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+  overflow: auto;
+  background: white;
+  color: black;
+}

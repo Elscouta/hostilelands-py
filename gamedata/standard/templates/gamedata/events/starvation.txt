@@ -1,0 +1,4 @@
+{{ deaths }} people died.
+
+You are a bad person.
+

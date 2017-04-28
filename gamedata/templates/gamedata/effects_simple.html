@@ -1,0 +1,8 @@
+<table>
+{% for key, effect in effects.items %}
+<tr>
+<td>{{ key }} :</td>
+<td>{{ effect.base }} {% ifnotequal effect.base effect.actual %} ( {{ effect.actual }} ){% endifnotequal %}</td>
+</tr>
+{% endfor %}
+</table>
